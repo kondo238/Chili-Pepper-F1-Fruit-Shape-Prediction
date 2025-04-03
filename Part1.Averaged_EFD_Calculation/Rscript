@@ -5,10 +5,6 @@ setwd(getwd())
 Acclist <- as.data.frame(read.csv("./Dataset/Accession_list.csv")) #Load_accession_list_data
 All_data <- as.data.frame(read.csv("./Dataset/Raw_EFD_data.csv"))# Load_raw_EFD_data_(80 variables)
 
-
-
-
-
 #2.Calculate_Averaged_EFD_values
 Direction <- c("a", "b") #a=Direction1 & b=Direction2
 Year <- c(2021, 2022, 2023)
@@ -42,8 +38,9 @@ for(i in 1:length(ID)){
 }
 
 rm(df, df2, d, i, n)
-write.csv(aveEFD, "Whole_mean_EFDs_in_inbred_lines.csv", row.names = F) #Save_Averaged_EFD_data
 
+
+write.csv(aveEFD, "Averaged_EFD_data.csv", row.names = F) #Save_Averaged_EFD_data
 
 
 
