@@ -42,7 +42,7 @@ for(i in 1:length(ID)){
 }
 
 rm(df, df2, d, i, n)
-write.csv(aveEFD, "./Output_data/Whole_mean_EFDs_in_inbred_lines.csv", row.names = F) #Save_Averaged_EFD_data
+write.csv(aveEFD, "Whole_mean_EFDs_in_inbred_lines.csv", row.names = F) #Save_Averaged_EFD_data
 
 
 
