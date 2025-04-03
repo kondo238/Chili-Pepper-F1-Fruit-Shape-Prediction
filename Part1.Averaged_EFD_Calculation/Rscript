@@ -2,8 +2,8 @@
 #1.Data_loading
 setwd(getwd())
 
-Acclist <- as.data.frame(read.csv("./Dataset/Extraction_list.csv")) #Load_accession_list_data
-All_data <- as.data.frame(read.csv("./Dataset/Nef_Data.csv"))# Load_raw_EFD_data_(80 variables)
+Acclist <- as.data.frame(read.csv("./Dataset/Accession_list.csv")) #Load_accession_list_data
+All_data <- as.data.frame(read.csv("./Dataset/Raw_EFD_data.csv"))# Load_raw_EFD_data_(80 variables)
 
 
 
