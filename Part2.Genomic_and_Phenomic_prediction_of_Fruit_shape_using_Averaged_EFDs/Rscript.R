@@ -393,7 +393,7 @@ for(x in 1:length(Direction)){
     p2h <- pheno[p2,] #Father_parent_EFD
     midpoint <- (p1h + p2h)/2 #Midpoint_calculation
     a <- abs(p1h-p2h)/2 #Additive_effect_calculation
-    d_est <- a*Rep_R[Rep_R$Direction == "a",-c(1:2)] #Estimate_dominance_effects_in_the_crossing_combination
+    d_est <- a*Rep_R[Rep_R$Direction == Direction[x],-c(1:2)] #Estimate_dominance_effects_in_the_crossing_combination
     pre_pheno <- midpoint + d_est #Calculate_predicted_EFDs_for_the_F1_by_adding_estimated_dominance_effects_on_the_midpoint_EFDs
     pre_F1 <- cbind(Direction=(Direction[x]),
                     ID=F1_ID[i],
