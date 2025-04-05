@@ -80,7 +80,7 @@ df[,(41+2)] <- 0
 
 PPdelta_predicted_EFD <- df
 write.csv(PPdelta_predicted_EFD,  "Predicted_F1_EFDs_with_all_combination_with_dominance_effects.csv") #Save_predicted_EFDs_as_csv_format
-rm(df, mean, mean_mt, ph1, ph1_2, ph2, ph2_2, pheno, a, Direction, f1, g, i, no2, p1, p2, q, r, Replicate, x, Years)
+rm(df, p1h, p1h_2, p2h, p2h_2, pheno, a, Direction, f1, g, i, p1, p2, q, r, x, d_est, midpoint, pb, pre_F1, pre_F1_2, pre_pheno)
 
 
 
@@ -130,4 +130,4 @@ for(i in 1:(nrow(Pre_df)/2)){
        ann = F, axes = F, col = "red", lwd = lw)
 }
 
-rm(x, ef, coord, lw, i, Direction)
+rm(x, ef, coord, lw, i, Direction, F1, Pre_df, Real_df, df)
