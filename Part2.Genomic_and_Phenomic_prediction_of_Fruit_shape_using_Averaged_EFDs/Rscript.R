@@ -153,13 +153,12 @@ for(x in 1:length(Direction)){
   rownames(pheno) <- all_ID
   rm(a)
   
-  #Preparation_of_training_genotypic_data(from 132 inbred accessions) and_test_genotypic_data(from_159_F1_accessions)
+  # Preparation of training genotypic data (from 132 inbred accessions) and test genotypic data (from 159 F1 accessions)
   gt.score2 <- rbind(gt.score[F1parent_ID,], sim_mt)
   
   X <- gt.score2
   poly <- apply(X, 2, var) > 0
   X <- X[, poly]
-  
   
   A <- A.mat(X,
              min.MAF = 0.05,
@@ -169,31 +168,27 @@ for(x in 1:length(Direction)){
   gt.score2 <- X
   rm(X, A, poly)
   
-  #Calculate_gaussian_relation_matrix
+  # Compute gaussian relation matrix
   A <- as.matrix(gt.score2[all_ID,])
   A <- calcGRM(A,
                methodGRM = "gaussian",
                kernel.h = "tuned")
   
-  
-  #Preparation_of_matrix_for_saving_predicted_EFDs
+  # Initialize prediction result matrix
   df <- as.data.frame(matrix(0,
                              ncol = ncol(pheno),
                              nrow = nrow(pheno))
   )
-  
-  
-  #Genomic_prediction_using_GBLUP-GAUSS
+  # Genomic prediction using GBLUP-GAUSS
   for(h in 1:ncol(pheno)){
     y_kin <- pheno[,h]
-    #Calculation_GBLUP_as_Fixed_effect
+    # Calculation GBLUP as Fixed effect
     geno <- as.character(rownames(A))
     
     X_kin <- as.data.frame(cbind(geno, y_kin)) #Kernel_setting
     kin <- kin.blup(X_kin, geno="geno", pheno="y_kin", GAUSS=FALSE,K=A,fixed=NULL,covariate=NULL,
                     PEV=FALSE,n.core=1,theta.seq=NULL)
-    
-    #predict y based on X.test
+    # Predict y based on X.test
     df[,h] <- as.numeric(kin$pred)
   }
   
@@ -214,52 +209,37 @@ Pre[,(41+2)] <- rep(0, nrow(Pre)) #Fill_0_as_constant_values_for_a1
 
 GP20_Pre <- Pre
 
+# Save predictions
 write.csv(GP20_Pre, "GP20_predicted_EFDs.csv", row.names = T) #Save_the_predicted_EFDs_as_csv_format
-
-rm(A, df, gt.score2, kin, pheno, Pre, X_kin, Direction, geno, h, x, y_kin, all_ID, F1parent_No, gt.score)
-
+rm(A, df, gt.score2, kin, pheno, Pre, X_kin, Direction, geno, h, x, y_kin, all_ID, F1parent_No, gt.score) # Clean up workspace
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-##############################################2.Phenomic Prediction_PPmid&PPδ#############################################################
-#2-1:PPmid(phenomic prediction for 159 F1 accessions based on averaged EFDs of 20 F1 paretnts in inbred accessions)
-#Data_preparation
+############################################## 2.Phenomic Prediction_PPmid&PPδ#############################################################
+#2-1: PPmid (phenomic prediction for 159 F1 accessions based on averaged EFDs of 20 F1 paretnts in inbred accessions)
+# Data preparation
 F1parent_No <- which(str_detect(Acclist$Note, pattern = "F1 parent"))
 F1parent_ID <- Acclist[F1parent_No,3]
 F1parent_ave <- Ave_data[c(F1parent_No,  #for direction 1
-                           (length(Acclist$ID)+F1parent_No)) #for direction 2
+                           (length(Acclist$ID)+F1parent_No)) # for direction 2
                          ,]
-Pre <- F1parent_ave[0,] #Matrix_for_saving_predicted_values_in_PPmid(phenomic prediction for 159 F1 accessions based on averaged EFDs of 20 F1 paretnts in inbred accessions)
-Direction <- c("a", "b") #a=direction1 & b=direction2
+Pre <- F1parent_ave[0,] # Matrix for saving predicted values in PPmid (phenomic prediction for 159 F1 accessions based on averaged EFDs of 20 F1 paretnts in inbred accessions)
+Direction <- c("a", "b") # a=direction1 & b=direction2
 
-#Perform_PPmid
+# Perform PPmid
 for(x in 1:length(Direction)){
-  #Preparation_of_EFD_of_F1_parent_data(from_20_inbred_accessions)
+  # Preparation of EFD of F1 parent data (from 20 inbred accessions)
   pheno <- F1parent_ave[F1parent_ave$Direction == Direction[x],] 
   row.names(pheno) <- pheno$ID
   pheno <- pheno[F1parent_ID,-c(1,2)]
   
-  #Calculate_midpoint_EFD_as_predicted_EFDs_for_F1
+  # Compute midpoint EFD as predicted EFDs for F1
   Pre1 <- F1parent_ave[0,]
   for(i in 1:length(F1_ID)){
-    p1 <- as.character(combi[i,1]) #Mother_parent_ID
-    p2 <- as.character(combi[i,2]) #Father_parent_ID
-    p1h <- pheno[p1,] #Mother_parent_EFD
-    p2h <- pheno[p2,] #Father_parent_EFD
-      midpoint <- (p1h + p2h)/2 #Midpoint_calculation
+    p1 <- as.character(combi[i,1]) # Mother parent ID
+    p2 <- as.character(combi[i,2]) # Father parent ID
+    p1h <- pheno[p1,] # Mother parent EFD
+    p2h <- pheno[p2,] # Father parent EFD
+      midpoint <- (p1h + p2h)/2 # Midpoint calculation
       pre_F1 <- cbind(Direction=(Direction[x]),
                       ID=F1_ID[i],
                       midpoint)
@@ -269,38 +249,32 @@ for(x in 1:length(Direction)){
   rm(Pre1)
 }
 
-Pre[,(1+2)] <- rep(1, nrow(Pre)) #Fill_1_as_constant_values_for_a1
-Pre[,(21+2)] <- rep(0, nrow(Pre)) #Fill_0_as_constant_values_for_a1
-Pre[,(41+2)] <- rep(0, nrow(Pre)) #Fill_0_as_constant_values_for_a1
+Pre[,(1+2)] <- rep(1, nrow(Pre)) # Fill 1 as constant values for a1
+Pre[,(21+2)] <- rep(0, nrow(Pre)) # Fill 0 as constant values for a1
+Pre[,(41+2)] <- rep(0, nrow(Pre)) # Fill 0 as constant values for a1
 
 PPmid_Pre <- Pre
+# Save predictions
 write.csv(PPmid_Pre, "PPmid_predicted_EFDs.csv", row.names = T) #Save_the_predicted_EFDs_as_csv_format
-
-rm(F1parent_ave, midpoint, p1h, p2h, Pre, pre_F1, F1parent_No, i, p1, p2, x)
-
+rm(F1parent_ave, midpoint, p1h, p2h, Pre, pre_F1, F1parent_No, i, p1, p2, x) # Clean up workspace
 
 
-
-
-
-
-#2-2:PPδ(phenomic prediction for 159 F1 accessions based on averaged EFDs of 20 F1 paretnts in inbred accessions and representative ratio between dominance and additive effects)
-#Data_preparation
+#2-2: PPδ (phenomic prediction for 159 F1 accessions based on averaged EFDs of 20 F1 paretnts in inbred accessions and representative ratio between dominance and additive effects)
+# Data preparation
 F1parent_No <- which(str_detect(Acclist$Note, pattern = "F1 parent"))
 F1parent_ID <- Acclist[F1parent_No,3]
-F1parent_ave <- Ave_data[c(F1parent_No,  #for direction 1
-                           (length(Acclist$ID)+F1parent_No)) #for direction 2
+F1parent_ave <- Ave_data[c(F1parent_No,  # for direction 1
+                           (length(Acclist$ID)+F1parent_No)) # for direction 2
                          ,]
-F1_ave <- Ave_data[c(which(Acclist$PopulationType == "F1"),  #for direction 1
-                     (length(Acclist$ID)+which(Acclist$PopulationType == "F1"))) #for direction 2
+F1_ave <- Ave_data[c(which(Acclist$PopulationType == "F1"),  # for direction 1
+                     (length(Acclist$ID)+which(Acclist$PopulationType == "F1"))) # for direction 2
                    ,]
-Pre <- F1parent_ave[0,] #Matrix_for_saving_predicted_values_in_PPmid(phenomic prediction for 159 F1 accessions based on averaged EFDs of 20 F1 paretnts in inbred accessions)
-Direction <- c("a", "b") #a=direction1 & b=direction2
+Pre <- F1parent_ave[0,] # Matrix for saving predicted values in PPmid (phenomic prediction for 159 F1 accessions based on averaged EFDs of 20 F1 paretnts in inbred accessions)
+Direction <- c("a", "b") # a=direction1 & b=direction2
 
-#Calculation_of_1.additive_effect and 2.dominance effects and 3. their ratio 159 F1 accessions.
+# Compute (1.) additive effect, (2.) dominance effects and (3.) their ratio 159 F1 accessions.
 A <- D <- R <- as.data.frame(F1_ave[,])
-A[,-c(1:2)] <- D[,-c(1:2)] <- R[,-c(1:2)] <- NA #Prepare matrix for saving additive effect, dominance effect, and their ratio
-
+A[,-c(1:2)] <- D[,-c(1:2)] <- R[,-c(1:2)] <- NA # Prepare matrix for saving additive effect, dominance effect, and their ratio
 
 for(x in 1:length(Direction)){
   pheno <- F1parent_ave[F1parent_ave$Direction == Direction[x],] 
@@ -332,9 +306,9 @@ for(x in 1:length(Direction)){
     }
 }
 
-rm(a, d, f1_pheno, f1h, p1h, p2h, pheno, r, f1, i, p1, p2)
+rm(a, d, f1_pheno, f1h, p1h, p2h, pheno, r, f1, i, p1, p2) # Clean up workspace
 
-#Determine_the_representative_ratio_between_additive_and_dominance_effect_among_156_F1_accessions
+# Determine the representative ratio between additive and dominance effect among 156 F1 accessions
 Rep_R <- as.data.frame(F1_ave[1:2,])
 Rep_R[1:2,1] <- c("a", "b")
 Rep_R[1:2,2] <- rep("Representative", 2)
@@ -344,18 +318,19 @@ for(i in 1:80){ #calculate_median_of_the_ratio
   Rep_R[1,(i+2)] <- median(R[R$Direction == "a",(i+2)])
   Rep_R[2,(i+2)] <- median(R[R$Direction == "b",(i+2)])
 }
-  
-write.csv(Rep_R, "Representative_ratio_between_dominance_and_additive_effect.csv", row.names = F)  
-rm(i, A, D, R)
 
-#Perform_PPδ
+# Save results
+write.csv(Rep_R, "Representative_ratio_between_dominance_and_additive_effect.csv", row.names = F)  
+rm(i, A, D, R) # Clean up workspace
+
+# Perform PPδ
 for(x in 1:length(Direction)){
-  #Preparation_of_EFD_of_F1_parent_data(from_20_inbred_accessions)
+  # Preparation of EFD of F1 parent data (from 20 inbred accessions)
   pheno <- F1parent_ave[F1parent_ave$Direction == Direction[x],] 
   row.names(pheno) <- pheno$ID
   pheno <- pheno[F1parent_ID,-c(1,2)]
   
-  #Prediction_of_F1_EFDs
+  # Prediction of F1 EFDs
   Pre1 <- F1parent_ave[0,]
   for(i in 1:length(F1_ID)){
     p1 <- as.character(combi[i,1]) #Mother_parent_ID
@@ -379,26 +354,13 @@ Pre[,(21+2)] <- rep(0, nrow(Pre)) #Fill_0_as_constant_values_for_a1
 Pre[,(41+2)] <- rep(0, nrow(Pre)) #Fill_0_as_constant_values_for_a1
 
 PPdelta_Pre <- Pre
+# Save predictions
 write.csv(PPdelta_Pre, "PPdelta_predicted_EFDs.csv", row.names = T) #Save_the_predicted_EFDs_as_csv_format
+rm(a, d_est, midpoint, p1h, p2h, pheno, Pre, pre_F1, Pre1, Direction, F1parent_No, p1, p2, x, i, pre_pheno) # Clean up workspace
 
 
-rm(a, d_est, midpoint, p1h, p2h, pheno, Pre, pre_F1, Pre1, Direction, F1parent_No, p1, p2, x, i, pre_pheno)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-#################################3.Draw_fruit_contours_based_on_predicted_and_real_EFDs######################################################
-#Define_the_Elliptic Fourier function
+################################# 3.Draw_fruit_contours_based_on_predicted_and_real_EFDs######################################################
+# Define the Elliptic Fourier function
 ef2coord <- function(ef, theta = seq(0, 2*pi, 0.01)) {
   x <- 0; y <- 0
   z <- length(ef)/4
@@ -410,16 +372,14 @@ ef2coord <- function(ef, theta = seq(0, 2*pi, 0.01)) {
   return(coord)
 }
 
+# Setting for illustration
+lw <- 2 # Line thickness
+Direction <- "b" # Determine the direction (a=Direction1 & b=Direction2)
+par(mfrow = c(10, 16), mar = c(0.0, 0.0, 0.0, 0.0)) # Determine the number of row (left) and column (right)
 
-#Setting_for_illustration
-lw <- 2 #line thickness
-Direction <- "b" #Determine_the_direction (a=Direction1 & b=Direction2)
-par(mfrow = c(10, 16), mar = c(0.0, 0.0, 0.0, 0.0)) #Determine_the_number_of_row(reft)_and_column(right)
-
-
-#Draw_real_and_predicted_EFD-based fruit contours
+# Draw real and predicted EFD-based fruit contours
 for(i in 1:length(F1_ID)){
-  #Draw_Real_EFD-based_fruit_contours(Black)
+  # Draw Real EFD-based fruit contours (Black)
   x <- F1_ave[F1_ave$Direction == Direction &
                 F1_ave$ID == F1_ID[i],-c(1:2)]
   ef <- as.matrix(x)
@@ -427,7 +387,7 @@ for(i in 1:length(F1_ID)){
   plot(coord$y, -coord$x, type = "l", xlim = c(-1.2, 1.2), asp = 1,
        ann = F, axes = F, col = "black", lwd = lw)
   
-  #Draw_predicted_EFD(GP[132])-based_fruit_contours(Red)
+  # Draw predicted EFD (GP[132]) - based fruit contours (Red)
   x <- GP132_Pre[GP132_Pre$Direction == Direction &
                    GP132_Pre$ID == F1_ID[i],-c(1:2)]
   ef <- as.matrix(x)
@@ -435,7 +395,7 @@ for(i in 1:length(F1_ID)){
   lines(coord$y, -coord$x, type = "l", xlim = c(-1.2, 1.2), asp = 1,
        ann = F, axes = F, col = "red", lwd = lw)
   
-  #Draw_predicted_EFD(GP[20])-based_fruit_contours(Green)
+  # Draw predicted EFD (GP[20]) - based fruit contours (Green)
   x <- GP20_Pre[GP20_Pre$Direction == Direction &
                    GP20_Pre$ID == F1_ID[i],-c(1:2)]
   ef <- as.matrix(x)
@@ -443,7 +403,7 @@ for(i in 1:length(F1_ID)){
   lines(coord$y, -coord$x, type = "l", xlim = c(-1.2, 1.2), asp = 1,
         ann = F, axes = F, col = "green4", lwd = lw)
   
-  #Draw_predicted_EFD(PPmid)-based_fruit_contours(Gold)
+  # Draw predicted EFD (PPmid) - based fruit contours (Gold)
   x <- PPmid_Pre[PPmid_Pre$Direction == Direction &
                   PPmid_Pre$ID == F1_ID[i],-c(1:2)]
   ef <- as.matrix(x)
@@ -451,7 +411,7 @@ for(i in 1:length(F1_ID)){
   lines(coord$y, -coord$x, type = "l", xlim = c(-1.2, 1.2), asp = 1,
         ann = F, axes = F, col = "gold2", lwd = lw)
   
-  #Draw_predicted_EFD(PPdelta)-based_fruit_contours(Blue)
+  # Draw predicted EFD (PPdelta) - based fruit contours (Blue)
   x <- PPdelta_Pre[PPdelta_Pre$Direction == Direction &
                    PPdelta_Pre$ID == F1_ID[i],-c(1:2)]
   ef <- as.matrix(x)
@@ -461,6 +421,3 @@ for(i in 1:length(F1_ID)){
   }
 
 rm(x, ef, coord, lw, i, ef2coord, Direction)
-
-
-
