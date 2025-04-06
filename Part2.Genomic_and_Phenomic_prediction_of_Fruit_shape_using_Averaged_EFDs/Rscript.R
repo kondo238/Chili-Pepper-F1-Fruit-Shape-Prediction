@@ -1,75 +1,68 @@
 ######################Genomic and phenomic prediction of F1 fruit contours###################################################################
+
+# Set working directory
 setwd(getwd())
+
+# Load required libraries 
 library(stringr)
 #library(SKM)
 library(rrBLUP)
 library(RAINBOWR)
 
 
-#Data_loading
-Acclist <- as.data.frame(read.csv("./Dataset/Accession_list.csv")) #Load_accession_list_data
-Ave_data <- as.data.frame(read.csv("./Dataset/Averaged_EFD_data.csv"))# Load_raw_EFD_data_(80 variables)
+# Load datasets
+Acclist <- as.data.frame(read.csv("./Dataset/Accession_list.csv")) # Load accession list
+Ave_data <- as.data.frame(read.csv("./Dataset/Averaged_EFD_data.csv")) # Load averaged EFD data
 Inbred_ID <- Acclist[Acclist$PopulationType == "Inbred",3]
-combi <- as.data.frame(read.csv("./Dataset/Parental_combinations_of_F1.csv")) #Load_list_for_parental_combinations_of_F1
-gt.score <- as.data.frame(read.csv("./Dataset/Genotypic_data.csv", row.names = 1)) #load_numeric_genotypic_data_of_132_inbred_accessions_(-1, 0, 1)_by_MIG-seq
+combi <- as.data.frame(read.csv("./Dataset/Parental_combinations_of_F1.csv")) # Load parental combinations
+gt.score <- as.data.frame(read.csv("./Dataset/Genotypic_data.csv", row.names = 1)) # Load genotypic data
+# Filter genotypic data for inbred accessions
 gt.score <- gt.score[Inbred_ID,]
 
-
-
-
-
-
-
-
 ##############################################1.Genomic Prediction_GP[132]&GP[20]#############################################################
-#1-1:Estimation_of_F1_genotypic_data_based_on_their_parental_genotypic_data
+
+# 1-1: Estimate F1 genotypic data based on parental genotypic data
 sim_mt <- as.data.frame(matrix(NA,
                                ncol = ncol(gt.score),
                                nrow = nrow(combi)))
 colnames(sim_mt) <- colnames(gt.score)
 rownames(sim_mt) <- combi[,3]
 
-
 F1_ID <- as.character(combi[,3])
 g <- gt.score
 g_list <- rownames(g)
 
-#Calculate_F1_genotypes(Calculating_Mean_of_parental_numeric_genotypic_data)
+# Compute F1 genotypes by averaging parental genotypic data
 for(i in 1:length(F1_ID)){
-  p1 <- as.numeric(g[which(g_list == combi[i,1]),]) #For mother parent
-  p2 <- as.numeric(g[which(g_list == combi[i,2]),]) #For father parent
+  p1 <- as.numeric(g[which(g_list == combi[i,1]),]) # Mother parent
+  p2 <- as.numeric(g[which(g_list == combi[i,2]),]) # Father parent
 
-  #Before_Impute
+  # Before_Impute
   f1 <- (p1+p2)/2
   f1[which(f1 == 0.5)] <- 1
   f1[which(f1 == -0.5)] <- -1
   sim_mt[i,] <- f1
 }
 
-rm(g, f1, g_list, i, p1, p2)  
+rm(g, f1, g_list, i, p1, p2)  # Clean up workspace
 
 
-
-
-
-
-
-
-#1-2:GP[132](Genomic prediction for 159 F1 accessions based on 132 inbred accessions including the F1 parents)
-#Data_preparation
+# 1-2: GP[132](- Genomic prediction for 159 F1 accessions based on 132 inbred parents
 Inbred_ave <- Ave_data[c(which(Acclist$PopulationType == "Inbred"),  #for direction 1
                          (length(Acclist$ID)+which(Acclist$PopulationType == "Inbred"))) #for direction 2
                          ,]
 
-Pre <- Inbred_ave[0,] #Matrix_for_saving_predicted_values_in_GP[132](Genomic prediction for 159 F1 accessions based on 132 inbred accessions including the F1 parents)
-Direction <- c("a", "b") #a=direction1 & b=direction2
+Pre <- Inbred_ave[0,] # Matrix for storing predicted values
 all_ID <- c(Inbred_ID, F1_ID)
-#genomic_prediction
+
+# Perform genomic prediction
 for(x in 1:length(Direction)){
   #Preparation_of_training_EFD_data(from_132_inbred_accessions)
   pheno <- Inbred_ave[Inbred_ave$Direction == Direction[x],] 
   row.names(pheno) <- pheno$ID
   pheno <- pheno[Inbred_ID,-c(1,2)]
+
+  # Initialize prediction matrix
   a <- as.data.frame(matrix(NA,
                             ncol = ncol(pheno),
                             nrow = nrow(sim_mt)))
@@ -79,13 +72,11 @@ for(x in 1:length(Direction)){
   rownames(pheno) <- all_ID
   rm(a)
   
-  #Preparation_of_training_genotypic_data(from 132 inbred accessions) and_test_genotypic_data(from_159_F1_accessions)
+  #Prepare genotypic data
   gt.score2 <- rbind(gt.score, sim_mt)
-  
   X <- gt.score2
   poly <- apply(X, 2, var) > 0
   X <- X[, poly]
-  
   
   A <- A.mat(X,
              min.MAF = 0.05,
@@ -95,79 +86,59 @@ for(x in 1:length(Direction)){
   gt.score2 <- X
   rm(X, A, poly)
   
-  #Calculate_gaussian_relation_matrix
+  # Compute Gaussian relationship matrix
   A <- as.matrix(gt.score2[all_ID,])
   A <- calcGRM(A,
                methodGRM = "gaussian",
                kernel.h = "tuned")
-  
-  
-  #Preparation_of_matrix_for_saving_predicted_EFDs
+
+  # Initialize prediction result matrix
   df <- as.data.frame(matrix(0,
                              ncol = ncol(pheno),
                              nrow = nrow(pheno)))
   
 
-  #Genomic_prediction_using_GBLUP-GAUSS
+  # Genomic prediction using GBLUP-GAUSS
   for(h in 1:ncol(pheno)){
   y_kin <- pheno[,h]
-  #Calculation_GBLUP_as_Fixed_effect
   geno <- as.character(rownames(A))
-
   X_kin <- as.data.frame(cbind(geno, y_kin)) #Kernel_setting
   kin <- kin.blup(X_kin, geno="geno", pheno="y_kin", GAUSS=FALSE,K=A,fixed=NULL,covariate=NULL,
                   PEV=FALSE,n.core=1,theta.seq=NULL)
-  
-  #predict y based on X.test
-  df[,h] <- as.numeric(kin$pred)
+    df[,h] <- as.numeric(kin$pred)
   }
   
   colnames(df) <- colnames(pheno)
   rownames(df) <- all_ID
-  
   df <- cbind(Direction = rep(Direction[x], length(F1_ID)),
               ID = F1_ID,
               df[-c(1:length(Inbred_ID)),])
-  
   Pre <- rbind(Pre, df)
-  
 }
 
-Pre[,(1+2)] <- rep(1, nrow(Pre)) #Fill_1_as_constant_values_for_a1
-Pre[,(21+2)] <- rep(0, nrow(Pre)) #Fill_0_as_constant_values_for_a1
-Pre[,(41+2)] <- rep(0, nrow(Pre)) #Fill_0_as_constant_values_for_a1
+Pre[,(1+2)] <- rep(1, nrow(Pre)) # Fill 1 as constant values for a1
+Pre[,(21+2)] <- rep(0, nrow(Pre)) #Fill 0 as constant values for a1
+Pre[,(41+2)] <- rep(0, nrow(Pre)) #Fill 0 as constant values for a1
 
 GP132_Pre <- Pre
 
-write.csv(GP132_Pre, "GP132_predicted_EFDs.csv", row.names = T) #Save_the_predicted_EFDs_as_csv_format
+# Save predictions
+write.csv(GP132_Pre, "GP132_predicted_EFDs.csv", row.names = T) 
+rm(A, df, gt.score2, kin, pheno, Pre, X_kin, Direction, geno, h, x, y_kin, all_ID) # Clean up workspace
 
-rm(A, df, gt.score2, kin, pheno, Pre, X_kin, Direction, geno, h, x, y_kin, all_ID)
-
-
-
-
-
-
-
-
-
-
-
-
-
-#1-3:GP[20](Genomic prediction for 159 F1 accessions based on 20 F1 paretnts in inbred accessions)
-#Data_preparation
+#1-3: [20]Genomic prediction for 159 F1 accessions based on 20 F1 parents in inbred accessions
+# Data preparation
 F1parent_No <- which(str_detect(Acclist$Note, pattern = "F1 parent"))
 F1parent_ID <- Acclist[F1parent_No,3]
-F1parent_ave <- Ave_data[c(F1parent_No,  #for direction 1
-                         (length(Acclist$ID)+F1parent_No)) #for direction 2
+F1parent_ave <- Ave_data[c(F1parent_No,  # for direction 1
+                         (length(Acclist$ID)+F1parent_No)) # for direction 2
                        ,]
 
 Pre <- F1parent_ave[0,] #Matrix_for_saving_predicted_values_in_GP[20](Genomic prediction for 159 F1 accessions based on 20 F1 paretnts in inbred accessions)
-Direction <- c("a", "b") #a=direction1 & b=direction2
+Direction <- c("a", "b") # a=direction1 & b=direction2
 all_ID <- c(F1parent_ID, F1_ID)
 
-#genomic_prediction
+# Genomic prediction
 for(x in 1:length(Direction)){
   #Preparation_of_training_EFD_data(from_20_inbred_accessions)
   pheno <- F1parent_ave[F1parent_ave$Direction == Direction[x],] 
