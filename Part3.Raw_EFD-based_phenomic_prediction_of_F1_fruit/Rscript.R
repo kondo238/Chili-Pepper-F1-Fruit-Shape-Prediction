@@ -5,7 +5,6 @@ setwd(getwd())
 library(stringr)
 library(progress)
 
-
 ################################# 1 Data loading ###################################################################################################################
 # Load list of accessions
 Acclist <- as.data.frame(read.csv("./Dataset/Accession_list.csv")) 
@@ -26,7 +25,6 @@ combi <- as.data.frame(read.csv("./Dataset/Parental_combinations_of_F1.csv"))
 Rep_R <- as.data.frame(read.csv("./Dataset/Representative_ratio_between_dominance_and_additive_effect.csv")) 
 
 ################################ 2. Prediction of F1 EFDs using PPδ #############################################################################################
-
 # Define directions (a = horizontal, b = vertical or vice versa)
 Direction <- c("a", "b") 
 
@@ -116,10 +114,6 @@ write.csv(PPdelta_predicted_EFD,  "Predicted_F1_EFDs_with_all_combination_with_d
 rm(df, p1h, p1h_2, p2h, p2h_2, pheno, a, Direction, f1, g, i, p1, p2, q, r, x, d_est, midpoint, pb, pre_F1, pre_F1_2, pre_pheno) # Clean up the workspace
 
 
-
-
-
-
 ################################# 3. Draw fruit contours based on predicted and real EFDs of F1 ######################################################
 # Define the Elliptic Fourier function
 ef2coord <- function(ef, theta = seq(0, 2*pi, 0.01)) {
@@ -132,7 +126,6 @@ ef2coord <- function(ef, theta = seq(0, 2*pi, 0.01)) {
   coord <- list(x = x, y = y)
   return(coord)
 }
-
 
 # Set plot layout and parameters
 lw <- 2 # Line thickness
