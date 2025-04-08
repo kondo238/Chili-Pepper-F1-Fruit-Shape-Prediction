@@ -1,4 +1,4 @@
-########## Part 3. Part 3. Prediction of EFDs for the 159 F1 accessions using PPδ based on raw EFD data of parental accessions ######################################################################
+########## Part 3. Prediction of EFDs for the 159 F1 accessions using PPδ based on raw EFD data of parental accessions ######################################################################
 # Set working directory
 setwd(getwd())
 # Load required libraries
