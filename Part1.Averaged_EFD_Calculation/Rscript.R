@@ -1,8 +1,9 @@
 ########################## Part.1 Averaged EFD data calculation ##############################################################################
 
-# 1.Data loading
+# Set working directory
 setwd(getwd())
 
+# 1.Data loading
 Acclist <- as.data.frame(read.csv("./Dataset/Accession_list.csv")) # Load accession list data
 All_data <- as.data.frame(read.csv("./Dataset/Raw_EFD_data.csv"))# Load raw EFD data (80 variables)
 
