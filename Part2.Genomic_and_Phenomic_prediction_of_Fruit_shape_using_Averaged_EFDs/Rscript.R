@@ -19,7 +19,7 @@ gt.score <- as.data.frame(read.csv("./Dataset/Genotypic_data.csv", row.names = 1
 # Filter genotypic data for inbred accessions
 gt.score <- gt.score[Inbred_ID,]
 
-##############################################1.Genomic Prediction_GP[132]&GP[20]#############################################################
+############################################## 1.Genomic Prediction GP[132] & GP[20] #############################################################
 
 # 1-1: Estimate F1 genotypic data based on parental genotypic data
 sim_mt <- as.data.frame(matrix(NA,
@@ -47,7 +47,7 @@ for(i in 1:length(F1_ID)){
 rm(g, f1, g_list, i, p1, p2)  # Clean up workspace
 
 
-# 1-2: GP[132](- Genomic prediction for 159 F1 accessions based on 132 inbred parents
+# 1-2: GP[132] - Genomic prediction for 159 F1 accessions based on 132 inbred parents
 Inbred_ave <- Ave_data[c(which(Acclist$PopulationType == "Inbred"),  #for direction 1
                          (length(Acclist$ID)+which(Acclist$PopulationType == "Inbred"))) #for direction 2
                          ,]
@@ -126,7 +126,7 @@ GP132_Pre <- Pre
 write.csv(GP132_Pre, "GP132_predicted_EFDs.csv", row.names = T) 
 rm(A, df, gt.score2, kin, pheno, Pre, X_kin, Direction, geno, h, x, y_kin, all_ID) # Clean up workspace
 
-#1-3: [20]Genomic prediction for 159 F1 accessions based on 20 F1 parents in inbred accessions
+# 1-3: GP[20] - Genomic prediction for 159 F1 accessions based on 20 F1 parents in inbred accessions
 # Data preparation
 F1parent_No <- which(str_detect(Acclist$Note, pattern = "F1 parent"))
 F1parent_ID <- Acclist[F1parent_No,3]
@@ -214,8 +214,8 @@ write.csv(GP20_Pre, "GP20_predicted_EFDs.csv", row.names = T) #Save_the_predicte
 rm(A, df, gt.score2, kin, pheno, Pre, X_kin, Direction, geno, h, x, y_kin, all_ID, F1parent_No, gt.score) # Clean up workspace
 
 
-############################################## 2.Phenomic Prediction_PPmid&PPδ#############################################################
-#2-1: PPmid (phenomic prediction for 159 F1 accessions based on averaged EFDs of 20 F1 paretnts in inbred accessions)
+############################################## 2.Phenomic Prediction PPmid & PPδ #############################################################
+# 2-1: PPmid - phenomic prediction for 159 F1 accessions based on averaged EFDs of 20 F1 paretnts in inbred accessions
 # Data preparation
 F1parent_No <- which(str_detect(Acclist$Note, pattern = "F1 parent"))
 F1parent_ID <- Acclist[F1parent_No,3]
@@ -259,7 +259,7 @@ write.csv(PPmid_Pre, "PPmid_predicted_EFDs.csv", row.names = T) #Save_the_predic
 rm(F1parent_ave, midpoint, p1h, p2h, Pre, pre_F1, F1parent_No, i, p1, p2, x) # Clean up workspace
 
 
-#2-2: PPδ (phenomic prediction for 159 F1 accessions based on averaged EFDs of 20 F1 paretnts in inbred accessions and representative ratio between dominance and additive effects)
+# 2-2: PPδ - phenomic prediction for 159 F1 accessions based on averaged EFDs of 20 F1 paretnts in inbred accessions and representative ratio between dominance and additive effects
 # Data preparation
 F1parent_No <- which(str_detect(Acclist$Note, pattern = "F1 parent"))
 F1parent_ID <- Acclist[F1parent_No,3]
@@ -272,7 +272,7 @@ F1_ave <- Ave_data[c(which(Acclist$PopulationType == "F1"),  # for direction 1
 Pre <- F1parent_ave[0,] # Matrix for saving predicted values in PPmid (phenomic prediction for 159 F1 accessions based on averaged EFDs of 20 F1 paretnts in inbred accessions)
 Direction <- c("a", "b") # a=direction1 & b=direction2
 
-# Compute (1.) additive effect, (2.) dominance effects and (3.) their ratio 159 F1 accessions.
+# Compute (I) additive effect, (II) dominance effects and (III) their ratio 159 F1 accessions
 A <- D <- R <- as.data.frame(F1_ave[,])
 A[,-c(1:2)] <- D[,-c(1:2)] <- R[,-c(1:2)] <- NA # Prepare matrix for saving additive effect, dominance effect, and their ratio
 
@@ -359,7 +359,7 @@ write.csv(PPdelta_Pre, "PPdelta_predicted_EFDs.csv", row.names = T) #Save_the_pr
 rm(a, d_est, midpoint, p1h, p2h, pheno, Pre, pre_F1, Pre1, Direction, F1parent_No, p1, p2, x, i, pre_pheno) # Clean up workspace
 
 
-################################# 3.Draw_fruit_contours_based_on_predicted_and_real_EFDs######################################################
+################################# 3. Draw fruit contours based on predicted and real EFDs ######################################################
 # Define the Elliptic Fourier function
 ef2coord <- function(ef, theta = seq(0, 2*pi, 0.01)) {
   x <- 0; y <- 0
