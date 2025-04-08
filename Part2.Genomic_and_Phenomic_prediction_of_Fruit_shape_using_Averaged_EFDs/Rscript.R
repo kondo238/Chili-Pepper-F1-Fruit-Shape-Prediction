@@ -9,7 +9,6 @@ library(stringr)
 library(rrBLUP)
 library(RAINBOWR)
 
-
 # Load datasets
 Acclist <- as.data.frame(read.csv("./Dataset/Accession_list.csv")) # Load accession list
 Ave_data <- as.data.frame(read.csv("./Dataset/Averaged_EFD_data.csv")) # Load averaged EFD data
@@ -43,9 +42,7 @@ for(i in 1:length(F1_ID)){
   f1[which(f1 == -0.5)] <- -1
   sim_mt[i,] <- f1
 }
-
 rm(g, f1, g_list, i, p1, p2)  # Clean up workspace
-
 
 # 1-2: GP[132] - Genomic prediction for 159 F1 accessions based on 132 inbred parents
 Inbred_ave <- Ave_data[c(which(Acclist$PopulationType == "Inbred"),  #for direction 1
@@ -97,7 +94,6 @@ for(x in 1:length(Direction)){
                              ncol = ncol(pheno),
                              nrow = nrow(pheno)))
   
-
   # Genomic prediction using GBLUP-GAUSS
   for(h in 1:ncol(pheno)){
   y_kin <- pheno[,h]
@@ -185,7 +181,7 @@ for(x in 1:length(Direction)){
     # Calculation GBLUP as Fixed effect
     geno <- as.character(rownames(A))
     
-    X_kin <- as.data.frame(cbind(geno, y_kin)) #Kernel_setting
+    X_kin <- as.data.frame(cbind(geno, y_kin)) # Kernel_setting
     kin <- kin.blup(X_kin, geno="geno", pheno="y_kin", GAUSS=FALSE,K=A,fixed=NULL,covariate=NULL,
                     PEV=FALSE,n.core=1,theta.seq=NULL)
     # Predict y based on X.test
@@ -203,9 +199,9 @@ for(x in 1:length(Direction)){
   
 }
 
-Pre[,(1+2)] <- rep(1, nrow(Pre)) #Fill_1_as_constant_values_for_a1
-Pre[,(21+2)] <- rep(0, nrow(Pre)) #Fill_0_as_constant_values_for_a1
-Pre[,(41+2)] <- rep(0, nrow(Pre)) #Fill_0_as_constant_values_for_a1
+Pre[,(1+2)] <- rep(1, nrow(Pre)) # Fill 1 as constant values for a1
+Pre[,(21+2)] <- rep(0, nrow(Pre)) # Fill 0 as constant values for a1
+Pre[,(41+2)] <- rep(0, nrow(Pre)) # Fill 0 as constant values for a1
 
 GP20_Pre <- Pre
 
@@ -214,7 +210,7 @@ write.csv(GP20_Pre, "GP20_predicted_EFDs.csv", row.names = T) #Save_the_predicte
 rm(A, df, gt.score2, kin, pheno, Pre, X_kin, Direction, geno, h, x, y_kin, all_ID, F1parent_No, gt.score) # Clean up workspace
 
 
-############################################## 2.Phenomic Prediction PPmid & PPδ #############################################################
+############################################## 2. Phenomic Prediction PPmid & PPδ #############################################################
 # 2-1: PPmid - phenomic prediction for 159 F1 accessions based on averaged EFDs of 20 F1 paretnts in inbred accessions
 # Data preparation
 F1parent_No <- which(str_detect(Acclist$Note, pattern = "F1 parent"))
@@ -357,7 +353,6 @@ PPdelta_Pre <- Pre
 # Save predictions
 write.csv(PPdelta_Pre, "PPdelta_predicted_EFDs.csv", row.names = T) #Save_the_predicted_EFDs_as_csv_format
 rm(a, d_est, midpoint, p1h, p2h, pheno, Pre, pre_F1, Pre1, Direction, F1parent_No, p1, p2, x, i, pre_pheno) # Clean up workspace
-
 
 ################################# 3. Draw fruit contours based on predicted and real EFDs ######################################################
 # Define the Elliptic Fourier function
