@@ -1,4 +1,4 @@
-######################Genomic and phenomic prediction of F1 fruit contours###################################################################
+###################### Part 2. Genomic and phenomic prediction of F1 fruit contours ###################################################################
 
 # Set working directory
 setwd(getwd())
