@@ -282,16 +282,16 @@ for(x in 1:length(Direction)){
   f1_pheno <- f1_pheno[F1_ID,-c(1,2)]
   
   for(i in 1:length(F1_ID)){
-    p1 <- as.character(combi[i,1]) #Mother_parent_ID
-    p2 <- as.character(combi[i,2]) #Father_parent_ID
-    f1 <- as.character(combi[i,3]) #F1_ID
-    p1h <- pheno[p1,] #Mother_parent_EFD
-    p2h <- pheno[p2,] #Father_parent_EFD
-    f1h <- f1_pheno[f1,] #F1_EFD
-    midpoint <- (p1h + p2h)/2 #Midpoint_calculation
-    a <- abs(p1h-p2h)/2 #Additive_effect_calculation
-    d <- f1h - midpoint #Dominance_effect_calculation
-    r <- d/a #Ratio_between_additive_and_dominance_effects_calculation
+    p1 <- as.character(combi[i,1]) # Mother parent ID
+    p2 <- as.character(combi[i,2]) # Father parent ID
+    f1 <- as.character(combi[i,3]) # F1 ID
+    p1h <- pheno[p1,] # Mother parent EFD
+    p2h <- pheno[p2,] # Father parent EFD
+    f1h <- f1_pheno[f1,] # F1 EFD
+    midpoint <- (p1h + p2h)/2 # Midpoint calculation
+    a <- abs(p1h-p2h)/2 # Additive effect calculation
+    d <- f1h - midpoint # Dominance effect calculation
+    r <- d/a # Ratio between additive and dominance effects calculation
     
     A[A$Direction == Direction[x] &
         A$ID == F1_ID[i],c(3:82)] <- a
@@ -329,14 +329,14 @@ for(x in 1:length(Direction)){
   # Prediction of F1 EFDs
   Pre1 <- F1parent_ave[0,]
   for(i in 1:length(F1_ID)){
-    p1 <- as.character(combi[i,1]) #Mother_parent_ID
-    p2 <- as.character(combi[i,2]) #Father_parent_ID
-    p1h <- pheno[p1,] #Mother_parent_EFD
-    p2h <- pheno[p2,] #Father_parent_EFD
-    midpoint <- (p1h + p2h)/2 #Midpoint_calculation
-    a <- abs(p1h-p2h)/2 #Additive_effect_calculation
-    d_est <- a*Rep_R[Rep_R$Direction == Direction[x],-c(1:2)] #Estimate_dominance_effects_in_the_crossing_combination
-    pre_pheno <- midpoint + d_est #Calculate_predicted_EFDs_for_the_F1_by_adding_estimated_dominance_effects_on_the_midpoint_EFDs
+    p1 <- as.character(combi[i,1]) # Mother parent ID
+    p2 <- as.character(combi[i,2]) # Father parent ID
+    p1h <- pheno[p1,] # Mother parent EFD
+    p2h <- pheno[p2,] # Father parent EFD
+    midpoint <- (p1h + p2h)/2 # Midpoint calculation
+    a <- abs(p1h-p2h)/2 # Additive effect calculation
+    d_est <- a*Rep_R[Rep_R$Direction == Direction[x],-c(1:2)] # Estimate dominance effects in the crossing combination
+    pre_pheno <- midpoint + d_est # Calculate predicted EFDs for the F1 by adding estimated dominance effects on the midpoint EFDs
     pre_F1 <- cbind(Direction=(Direction[x]),
                     ID=F1_ID[i],
                     pre_pheno)
