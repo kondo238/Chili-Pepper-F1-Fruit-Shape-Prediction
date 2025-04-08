@@ -1,11 +1,13 @@
 ########## Part 3. Prediction of EFDs for the 159 F1 accessions using PPδ based on raw EFD data of parental accessions ######################################################################
+
 # Set working directory
 setwd(getwd())
 # Load required libraries
 library(stringr)
 library(progress)
 
-################################# 1 Data loading ###################################################################################################################
+################################# 1. Data loading ###################################################################################################################
+
 # Load list of accessions
 Acclist <- as.data.frame(read.csv("./Dataset/Accession_list.csv")) 
 
@@ -24,7 +26,9 @@ combi <- as.data.frame(read.csv("./Dataset/Parental_combinations_of_F1.csv"))
 # Load ratio between dominance and additive effects, estimated previously
 Rep_R <- as.data.frame(read.csv("./Dataset/Representative_ratio_between_dominance_and_additive_effect.csv")) 
 
+
 ################################ 2. Prediction of F1 EFDs using PPδ #############################################################################################
+
 # Define directions (a = horizontal, b = vertical or vice versa)
 Direction <- c("a", "b") 
 
@@ -115,6 +119,7 @@ rm(df, p1h, p1h_2, p2h, p2h_2, pheno, a, Direction, f1, g, i, p1, p2, q, r, x, d
 
 
 ################################# 3. Draw fruit contours based on predicted and real EFDs of F1 ######################################################
+
 # Define the Elliptic Fourier function
 ef2coord <- function(ef, theta = seq(0, 2*pi, 0.01)) {
   x <- 0; y <- 0
