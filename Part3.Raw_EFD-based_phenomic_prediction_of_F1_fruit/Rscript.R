@@ -2,6 +2,7 @@
 
 # Set working directory
 setwd(getwd())
+
 # Load required libraries
 library(stringr)
 library(progress)
