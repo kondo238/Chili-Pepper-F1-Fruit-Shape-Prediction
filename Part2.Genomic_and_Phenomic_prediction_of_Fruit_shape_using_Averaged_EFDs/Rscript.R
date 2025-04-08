@@ -211,6 +211,7 @@ rm(A, df, gt.score2, kin, pheno, Pre, X_kin, Direction, geno, h, x, y_kin, all_I
 
 
 ############################################## 2. Phenomic Prediction PPmid & PPδ #############################################################
+
 # 2-1: PPmid - phenomic prediction for 159 F1 accessions based on averaged EFDs of 20 F1 paretnts in inbred accessions
 # Data preparation
 F1parent_No <- which(str_detect(Acclist$Note, pattern = "F1 parent"))
@@ -354,7 +355,9 @@ PPdelta_Pre <- Pre
 write.csv(PPdelta_Pre, "PPdelta_predicted_EFDs.csv", row.names = T) #Save_the_predicted_EFDs_as_csv_format
 rm(a, d_est, midpoint, p1h, p2h, pheno, Pre, pre_F1, Pre1, Direction, F1parent_No, p1, p2, x, i, pre_pheno) # Clean up workspace
 
+
 ################################# 3. Draw fruit contours based on predicted and real EFDs ######################################################
+
 # Define the Elliptic Fourier function
 ef2coord <- function(ef, theta = seq(0, 2*pi, 0.01)) {
   x <- 0; y <- 0
