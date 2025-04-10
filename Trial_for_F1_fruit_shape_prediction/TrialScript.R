@@ -1,20 +1,15 @@
 ##########Trial_script:Perform_fruit_shape_prediction_using_PPδ######################################################################
-
-######################NOTE################################################################################################################################
+######################NOTE!!!################################################################################################################################
 #1.This trial uses EFD data of the two accessions (Parent1 and Parent2) as parental examples and predicts their F1 fruit shape contours
 #2.The EFD data was obtained by SHAPE program saved as ".nef" format (The number of harmonics was 20)
 #3.In the shape program, EFDs for one direction (Direction 1 or Direction 2) were extracted from five fruits per one accession and saved as same ".nef" file
 #4.For implementation of PPδ, representative ratio between dominance and additive_effect derived from the 156 F1 accession in author's research.
 #5. fruit shape prediction was performed based on parental raw EFD and averaged EFD data
 
-setwd(getwd())
-library(stringr)
-
-
 #################################Step.1_Data_loading_from_".nef"_format_file_and_Data_formatting###################################################################################################################
 #Parental_raw_EFD_data_was_saved_in_"df"
 #Parental_Averaged_EFD_data_was_saved_in_"Ave_df"
-
+setwd(getwd())
 ID <- c("Parent1", "Parent2") #Define parental ID
 Direction <- c("a", "b") #Define direction (a=Direction1, b=Direction2)
 Replicate <- c("P1", "P2", "P3", "P4", "P5") #Define_fruit_replicates_(In this trial, we have five data for one direction per one accession)
