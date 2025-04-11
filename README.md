@@ -23,7 +23,7 @@ PPδ: Phenomic prediction based solely on parental EFDs data, not considering do
 
 ・This repository consists of four directories to perform F1 fruit shape predictions from raw EFD data. Each task can be performed by downloading each directory. The details are described below.
 
-Explanations for four directories
+# Explanations for four directories
 # Part1.Averaged_EFD_Calculation
 ・This directory is prepared for calculating averaged EFDs of C. annuum 291 accessions (132 inbred accessions + 159 F1 accessions derived from 20 parents in the 132 inbred accessions). For later tasks, these averaged EFDs will be used.
 
