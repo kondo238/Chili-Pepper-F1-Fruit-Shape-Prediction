@@ -25,9 +25,9 @@ Fumiya Kondoa, Yui Kumanomido, Mariasilvia D’Andrea, Valentino Palombo, Nahed 
 
 ・This repositry consists four directories to perform F1 fruit shape predictions from raw EFD data. The details were described below.
 
-#Explanations for four directories
+# Explanations for four directories
 
-#Part1.Averaged_EFD_Calculation
+# Part1.Averaged_EFD_Calculation
 
 ・This directory is prepared for calculating averaged EFDs of C. annuum 291 accessions (132 inbred accession + 159 F1 accessions derived from 20 parents in the 132 inbred accessions). For later tasks, these averaged EFDs will be used.
 
