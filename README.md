@@ -4,3 +4,5 @@ Prediction of fruit shapes in F1 progenies based on parental image data using el
 
 Fumiya Kondoa, Yui Kumanomido, Mariasilvia D’Andrea, Valentino Palombo, Nahed Ahmed, Shino Futatsuyama, Kazuhiro Nemoto, Kenichi Matsushima
 (Under review)
+
+#AA
