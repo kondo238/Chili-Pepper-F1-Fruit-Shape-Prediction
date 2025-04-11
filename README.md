@@ -90,10 +90,10 @@ Fumiya Kondoa, Yui Kumanomido, Mariasilvia D’Andrea, Valentino Palombo, Nahed 
 
 ・Dataset directory in this directory contains five datasets below.
 
-1. Parent1_a.nef: raw EFD data in Direction 1 (One of the two fruit angles) for Parent1
-2. Parent1_b.nef: raw EFD data in Direction 2 (The other angle) for Parent1
-3. Parent1_a.nef: raw EFD data in Direction 1 (One of the two fruit angles) for Parent2
-4. Parent1_b.nef: raw EFD data in Direction 2 (The other angle) for Parent2
+1. Parent1_a.nef: Raw EFD data in Direction 1 (One of the two fruit angles) for Parent1
+2. Parent1_b.nef: Raw EFD data in Direction 2 (The other angle) for Parent1
+3. Parent1_a.nef: Raw EFD data in Direction 1 (One of the two fruit angles) for Parent2
+4. Parent1_b.nef: Raw EFD data in Direction 2 (The other angle) for Parent2
 5. Representative_ratio_between_dominance_and_additive_effect.csv: Constant values to perform PPδ. These constant values are calculated former task "Part3.Raw_EFD-based_phenomic_prediction_of_F1_fruit"
 
 ・R script in this directory enables raw EFD data-based PPδ to predict possible fruit contours in the 159 F1 accessions, and the illustration of fruit contours based on the real and predcted EFDs.
