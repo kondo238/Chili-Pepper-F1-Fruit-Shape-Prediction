@@ -5,7 +5,6 @@ setwd(getwd())
 
 # Load required libraries 
 library(stringr)
-#library(SKM)
 library(rrBLUP)
 library(RAINBOWR)
 
