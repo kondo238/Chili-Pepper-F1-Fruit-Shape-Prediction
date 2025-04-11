@@ -8,5 +8,7 @@ Fumiya Kondoa, Yui Kumanomido, Mariasilvia D’Andrea, Valentino Palombo, Nahed 
 
 # NOTE
 ・This repositry shared dataset and Rscripts to perform PPδ, a phenomic prediction methods to estimate fruit shapes of F1 progenies in chili peppers (Capsicum annuum).
+
 ・PPδ enables predictions of fruit contours in F1 progenies of chili peppers based on the parental EFDs.
+
 ・The detailed concepts were written in our papper (Kondo et al. unpublised).
