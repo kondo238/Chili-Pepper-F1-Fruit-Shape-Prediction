@@ -25,5 +25,12 @@ Fumiya Kondoa, Yui Kumanomido, Mariasilvia D’Andrea, Valentino Palombo, Nahed 
 
 ・This repositry consists four directories to perform F1 fruit shape predictions from raw EFD data. The details were described below.
 
-#Explanations for four directory
-#Part.1 
+#Explanations for four directories
+#Part1.Averaged_EFD_Calculation
+・This directory is prepared for calculating averaged EFDs of C. annuum 291 accessions (132 inbred accession + 159 F1 accessions derived from 20 parents in the 132 inbred accessions). For later tasks, these averaged EFDs will be used.
+
+・Dataset directory in this directory contain two datasets below.
+
+1. Accession_list.csv: Lists of plant materials in our study
+
+2. Raw_EFD_data.csv: Raw EFD data of the 291 accessions. In our study, EFDs were obtained from a total of 8,730 images (2 angles(Direction1 and Direction2) X 291 accesssions X 3 cultivation year X 5 fruits) 
