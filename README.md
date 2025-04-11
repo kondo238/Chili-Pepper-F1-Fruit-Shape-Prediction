@@ -23,4 +23,6 @@ Fumiya Kondoa, Yui Kumanomido, Mariasilvia D’Andrea, Valentino Palombo, Nahed 
 
 ・The detailed concepts were written in our papper (Kondo et al. unpublised).
 
-・This repositry consists four directories. The  
+・This repositry consists four directories for core tasks to perform F1 fruit shape predictions from raw EFD data. The details were described below.
+
+# Chili-Pepper-F1-Fruit-Shape-Prediction
