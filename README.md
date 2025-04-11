@@ -7,8 +7,20 @@ Fumiya Kondoa, Yui Kumanomido, Mariasilvia D’Andrea, Valentino Palombo, Nahed 
 
 
 # NOTE
-・This repositry shared dataset and Rscripts to perform PPδ, a phenomic prediction methods to estimate fruit shapes of F1 progenies in chili peppers (Capsicum annuum).
+・This repositry shares all datasets and Rscripts to perform phenomic and genomic prediction methods to estimate fruit shapes of F1 progenies in chili peppers (Capsicum annuum).
 
-・PPδ enables predictions of fruit contours in F1 progenies of chili peppers based on the parental EFDs.
+・In these prediction, Elliptic Fourier descriptors (EFDs) extracted fruit image data are used and fruit contours of F1 progenies will be predicted based on parental EFDs for phenomic prediction with (phenomic prediction) or without (for genomic prediction) genomic data. 
+
+・Using shared datasets and R scripts, four kinds of predictions for F1 progenies can pe performed as below.
+
+1. PPmid: Prediction methods based on parental EFDs data with constant values (constant ratio between dominance and additive effects), considering dominance effects observed in F1 accession.
+
+2. PPδ: Phenomic prediction based solely on parental EFDs data, non-considering dominance effects observed in F1 accession.
+
+3. GP[20]: Genomic prediction based on parental EFDs and genotypic data, almost non-considering dominance effects observed in F1 accession.
+
+4. GP[132]: Genomic prediction based on EFDs and genotypic data of 132 inbred accessions including F1 parents., almost non-considering dominance effects observed in F1 accession.
 
 ・The detailed concepts were written in our papper (Kondo et al. unpublised).
+
+・This repositry consists four directories. The  
