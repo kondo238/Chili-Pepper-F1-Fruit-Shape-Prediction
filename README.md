@@ -1,9 +1,9 @@
 # Chili-Pepper-F1-Fruit-Shape-Prediction
-Research paper：Prediction of fruit shapes in F1 progenies of chili peppers (Capsicum annuum) based on parental image data using elliptic Fourier analysis
+**Research paper**：*Prediction of fruit shapes in F1 progenies of chili peppers (Capsicum annuum) based on parental image data using elliptic Fourier analysis*
 
-Authors：Fumiya Kondo, Yui Kumanomido, Mariasilvia D’Andrea, Valentino Palombo, Nahed Ahmed, Shino Futatsuyama, Kazuhiro Nemoto, Kenichi Matsushima
+**Authors**：Fumiya Kondo, Yui Kumanomido, Mariasilvia D’Andrea, Valentino Palombo, Nahed Ahmed, Shino Futatsuyama, Kazuhiro Nemoto, Kenichi Matsushima
 
-Status: Under review (Computer and Electronics in Agriculture, Elsevier, submitted 2025-04-11)
+**Status**: Under review (Computer and Electronics in Agriculture, Elsevier, submitted 2025-04-11)
 
 # Overview
 ・This repository contains all datasets and R scripts used for implementing phenomic and genomic prediction models to estimate the fruit shapes of F1 chili pepper progenies (Capsicum annuum).
