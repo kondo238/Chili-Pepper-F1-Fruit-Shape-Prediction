@@ -28,7 +28,7 @@ The repository is organized into four main directories, each corresponding to a 
 
 # Part 1. Averaged EFD Calculation
 **Purpose:** 
-Calculate the average EFDs for 291 accessions (132 inbreds + 159 F1s) from raw image data. These averaged EFDs are used in subsequent prediction steps.
+Calculate the averaged EFDs for 291 accessions (132 inbreds + 159 F1s) from raw EFD data. These averaged EFDs are used in subsequent prediction steps.
 
 **Datasets:**
 * `Accession_list.csv`: List of plant materials in our study
