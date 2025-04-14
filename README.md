@@ -31,20 +31,15 @@ The repository is organized into four main directories, each corresponding to a 
 
 # Part 1. Averaged EFD Calculation
 **Purpose:** 
-
 Calculate the average EFDs for 291 accessions (132 inbreds + 159 F1s) from raw image data. These averaged EFDs are used in subsequent prediction steps.
 
 **Datasets:**
-
-・Accession_list.csv: List of plant materials in our study
-
-・Raw_EFD_data.csv: EFD data extracted from 8,730 fruit images (2 views × 291 accessions × 3 years × 5 fruits).
+* Accession_list.csv: List of plant materials in our study
+* Raw_EFD_data.csv: EFD data extracted from 8,730 fruit images (2 views × 291 accessions × 3 years × 5 fruits).
 
 **Script:**
-
-・Computes the average EFDs per accession per view direction.
-
-・**No R packages required**.
+* Computes the average EFDs per accession per view direction.
+* **No R packages required**.
 
 # Part 2. Genomic and Phenomic prediction of Fruit shape using Averaged EFDs
 **Purpose:** 
@@ -52,10 +47,10 @@ Perform genomic (GP[20], GP[132]) and phenomic (PPmid, PPδ) prediction using th
 In each prediction method, fruit contours in the 159 F1 accessions are predicted based on the averaged EFDs data of 20 F1 parents and other inbred accessions.
 
 **Datasets:**
-・Accession_list.csv: List of plant materials in our study
-・Averaged_EFD_data.csv: Generated in Part 1.
-・Genotypic_data.csv: Genotype matrix (−1, 0, 1) from MIG-seq (3,149 SNPs).
-・Parental_combinations_of_F1.csv: Links each F1 to its parental accessions.
+* Accession_list.csv: List of plant materials in our study
+* Averaged_EFD_data.csv: Generated in Part 1.
+* Genotypic_data.csv: Genotype matrix (−1, 0, 1) from MIG-seq (3,149 SNPs).
+* Parental_combinations_of_F1.csv: Links each F1 to its parental accessions.
 
 **Script:**
 ・Predicts EFDs for the 159 F1 accessions.
