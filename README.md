@@ -6,37 +6,39 @@
 **Status**: Under review (Computer and Electronics in Agriculture, Elsevier, submitted 2025-04-11)
 
 # Overview
-・This repository contains all datasets and R scripts used for implementing phenomic and genomic prediction models to estimate the fruit shapes of F1 chili pepper progenies (Capsicum annuum).
+This repository contains all datasets and R scripts used for implementing **phenomic and genomic prediction models** to estimate the fruit shapes of F1 chili pepper progenies (Capsicum annuum).
 
-・In these predictions, Elliptic Fourier descriptors (EFDs) extracted from fruit image data are used, and fruit contours of F1 progenies will be predicted based on parental EFDs for phenomic prediction with (phenomic prediction) or without (for genomic prediction) genomic data.
+・Predictions are based on **Elliptic Fourier Descriptors (EFDs)** extracted from fruit images.
+・F1 fruit shapes are predicted from parental EFDs, either:
+    ・using **only image-derived EFDs** (*phenomic prediction*, PPδ), or
+    ・combining EFDs with **genotypic data** (*genomic prediction*, GP).
 
-・Using shared datasets and R scripts, four kinds of predictions for F1 progenies can be performed as below.
+Using the provided datasets and R scripts, the following four prediction strategies can be applied:
 
-GP[20]: Genomic prediction based on parental EFDs and genotypic data, mostly not considering dominance effects observed in F1 accessions.
+・**GP[20]**: Genomic prediction using EFDs and genotypic data from 20 F1 parents. Dominance effects in F1 progenies are mostly not considered.
 
-GP[132]: Genomic prediction based on EFDs and genotypic data of 132 inbred accessions including F1 parents, mostly not considering dominance effects observed in F1 accessions.
+・**GP[132]**: Genomic prediction using EFDs and genotypic data from 132 inbred accessions (including the 20 F1 parents). Dominance effects are mostly not considered.
 
-PPmid: Prediction method based on parental EFDs data with constant values (constant ratio between dominance and additive effects), considering dominance effects observed in F1 accessions.
+・**PPmid**: Phenomic prediction using parental EFDs and a fixed dominance-to-additive effect ratio, accounting for dominance effects.
 
-PPδ: Phenomic prediction based solely on parental EFDs data, not considering dominance effects observed in F1 accessions.
+・**PPδ**: Pure phenomic prediction based solely on parental EFDs, without considering dominance.
 
-・The detailed concepts were written in our paper (Kondo et al. unpublished).
+Full methodological details are described in the manuscript (Kondo et al., under review).
 
-・This repository consists of four directories to perform F1 fruit shape predictions from raw EFD data. Each task can be performed by downloading each directory. The details are described below.
+# Repository Structure
+The repository is organized into four main directories, each corresponding to a specific step in the F1 fruit shape prediction pipeline. Each directory is self-contained and can be used independently.
 
-# Explanations for four directories
 # Part1.Averaged_EFD_Calculation
-・This directory is prepared for calculating averaged EFDs of C. annuum 291 accessions (132 inbred accessions + 159 F1 accessions derived from 20 parents in the 132 inbred accessions). For later tasks, these averaged EFDs will be used.
+**Purpose:** Calculate the average EFDs for 291 accessions (132 inbreds + 159 F1s) from raw image data. These averaged EFDs are used in subsequent prediction steps.
 
-・The dataset directory in this folder contains two datasets below:
+# Datasets:
+・Accession_list.csv: List of plant materials in our study
 
-Accession_list.csv: List of plant materials in our study
+・Raw_EFD_data.csv: Raw EFD data of the 291 accessions. In our study, EFDs were obtained from a total of 8,730 images (2 angles [Direction1 and Direction2] × 291 accessions × 3 cultivation years × 5 fruits)
 
-Raw_EFD_data.csv: Raw EFD data of the 291 accessions. In our study, EFDs were obtained from a total of 8,730 images (2 angles [Direction1 and Direction2] × 291 accessions × 3 cultivation years × 5 fruits)
-
-・The R script in this directory enables calculation of averaged EFDs for each accession in each angle from raw EFD data.
-
-・This task doesn't need any R packages.
+# Script:
+・Computes the average EFDs per accession per view direction.
+・No R packages required.
 
 # Part2.Genomic_and_Phenomic_prediction_of_Fruit_shape_using_Averaged_EFDs
 ・This directory is prepared for performing genomic and phenomic prediction methods (GP[20], GP[132], PPmid, PPδ).
