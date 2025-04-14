@@ -11,6 +11,7 @@
 # Parental raw EFD data was saved in "df"
 # Parental Averaged EFD data was saved in "Ave_df"
 
+# Set working directory
 setwd(getwd())
 ID <- c("Parent1", "Parent2") # Define parental ID
 Direction <- c("a", "b") # Define direction (a=Direction1, b=Direction2)
@@ -18,10 +19,10 @@ Replicate <- c("P1", "P2", "P3", "P4", "P5") # Define fruit replicates (In this 
 
 # Load EFD data for each direction and parent
 Parent1_a <- as.data.frame(read.delim("./Dataset/Parent1_a.nef", sep = "")) # Load EFD data (Direction 1) from five fruits of Parent1 using SHAPE program
-Parent1_b <- as.data.frame(read.delim("./Dataset/Parent1_b.nef", sep = "")) # Load EFD data (Direction 2) from five_fruits of Parent1 using SHAPE program
+Parent1_b <- as.data.frame(read.delim("./Dataset/Parent1_b.nef", sep = "")) # Load EFD data (Direction 2) from five fruits of Parent1 using SHAPE program
 
-Parent2_a <- as.data.frame(read.delim("./Dataset/Parent2_a.nef", sep = "")) # Load_EFD_data(Direction 1) from five fruits of Parent2 using SHAPE program
-Parent2_b <- as.data.frame(read.delim("./Dataset/Parent2_b.nef", sep = "")) # Load_EFD_data(Direction 2) from_five_fruits_of Parent2 using SHAPE program
+Parent2_a <- as.data.frame(read.delim("./Dataset/Parent2_a.nef", sep = "")) # Load EFD data (Direction 1) from five fruits of Parent2 using SHAPE program
+Parent2_b <- as.data.frame(read.delim("./Dataset/Parent2_b.nef", sep = "")) # Load EFD data (Direction 2) from five fruits of Parent2 using SHAPE program
 
 # Data collection formatting for raw EFD data
 df <- as.data.frame(matrix(NA,
