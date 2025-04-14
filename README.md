@@ -28,7 +28,7 @@ Using the provided datasets and R scripts, the following four prediction strateg
 # Repository Structure
 The repository is organized into four main directories, each corresponding to a specific step in the F1 fruit shape prediction pipeline. Each directory is self-contained and can be used independently.
 
-# Part1.Averaged_EFD_Calculation
+# Part 1. Averaged EFD Calculation
 **Purpose:** Calculate the average EFDs for 291 accessions (132 inbreds + 159 F1s) from raw image data. These averaged EFDs are used in subsequent prediction steps.
 
 **Datasets:**
@@ -39,7 +39,7 @@ The repository is organized into four main directories, each corresponding to a 
 ・Computes the average EFDs per accession per view direction.
 ・No R packages required.
 
-# Part2.Genomic_and_Phenomic_prediction_of_Fruit_shape_using_Averaged_EFDs
+# Part 2. Genomic and Phenomic prediction of Fruit shape using Averaged EFDs
 **Purpose:** 
 Perform genomic (GP[20], GP[132]) and phenomic (PPmid, PPδ) prediction using the averaged EFDs calculated in Part 1.
 In each prediction method, fruit contours in the 159 F1 accessions are predicted based on the averaged EFDs data of 20 F1 parents and other inbred accessions.
@@ -55,7 +55,7 @@ In each prediction method, fruit contours in the 159 F1 accessions are predicted
 ・Visualizes fruit contours using both observed and predicted EFDs.
 ・**Required R packages**: stringr, rrBLUP, RAINBOWR.
 
-# Part3.Raw_EFD-based_phenomic_prediction_of_F1_fruit
+# Part 3. Raw EFD-based phenomic prediction of F1 fruit
 **Purpose:**
 ・Perform PPδ using raw EFD data, which showed the highest accuracy among all methods.
 In each prediction method, fruit contours in the 159 F1 accessions are predicted based on the averaged EFDs data of 20 F1 parents and other inbred accessions.
@@ -71,7 +71,7 @@ In each prediction method, fruit contours in the 159 F1 accessions are predicted
 ・Visualizes predicted fruit contours.
 ・**Required R packages**: stringr, progress. 
 
-# Trial_for_F1_fruit_shape_prediction
+# Trial for F1 fruit shape prediction
 **Purpose:**
 Trial run of the PPδ method using .nef files (raw EFD data exported from SHAPE software)
 [This software extracts EFD data from raw image data ".jpg"]
