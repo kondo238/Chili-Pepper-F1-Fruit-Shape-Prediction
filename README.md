@@ -9,7 +9,6 @@
 This repository contains all datasets and R scripts used for implementing **phenomic and genomic prediction models** to estimate the fruit shapes of F1 chili pepper progenies (Capsicum annuum).
 
 * Predictions are based on **Elliptic Fourier Descriptors (EFDs)** extracted from fruit images.
-
 * F1 fruit shapes are predicted from parental EFDs, either:
     * using **only image-derived EFDs** (*phenomic prediction*, PPδ), or
     * combining EFDs with **genotypic data** (*genomic prediction*, GP).
@@ -17,11 +16,8 @@ This repository contains all datasets and R scripts used for implementing **phen
 Using the provided datasets and R scripts, the following four prediction strategies can be applied:
 
 * **GP[20]**: Genomic prediction using EFDs and genotypic data from 20 F1 parents. Dominance effects in F1 progenies are mostly not considered.
-
 * **GP[132]**: Genomic prediction using EFDs and genotypic data from 132 inbred accessions (including the 20 F1 parents). Dominance effects are mostly not considered.
-
 * **PPmid**: Phenomic prediction using parental EFDs and a fixed dominance-to-additive effect ratio, accounting for dominance effects.
-
 * **PPδ**: Pure phenomic prediction based solely on parental EFDs, without considering dominance.
 
 **Full methodological details are described in the manuscript (Kondo et al., under review).**
@@ -53,9 +49,9 @@ In each prediction method, fruit contours in the 159 F1 accessions are predicted
 * Parental_combinations_of_F1.csv: Links each F1 to its parental accessions.
 
 **Script:**
-・Predicts EFDs for the 159 F1 accessions.
-・Visualizes fruit contours using both observed and predicted EFDs.
-・**Required R packages**: stringr, rrBLUP, RAINBOWR.
+* Predicts EFDs for the 159 F1 accessions.
+* Visualizes fruit contours using both observed and predicted EFDs.
+* **Required R packages**: stringr, rrBLUP, RAINBOWR.
 
 # Part 3. Raw EFD-based phenomic prediction of F1 fruit
 **Purpose:**
