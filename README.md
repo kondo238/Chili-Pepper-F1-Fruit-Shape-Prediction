@@ -17,8 +17,9 @@ Using the provided datasets and R scripts, the following four prediction strateg
 
 * **GP[20]**: Genomic prediction using EFDs and genotypic data from 20 F1 parents. Dominance effects in F1 progenies are mostly not considered.
 * **GP[132]**: Genomic prediction using EFDs and genotypic data from 132 inbred accessions (including the 20 F1 parents). Dominance effects are mostly not considered.
-* **PPmid**: Phenomic prediction using parental EFDs and a fixed dominance-to-additive effect ratio, accounting for dominance effects.
-* **PPδ**: Pure phenomic prediction based solely on parental EFDs, without considering dominance.
+* **PPmid**: Pure phenomic prediction based solely on parental EFDs, without considering dominance.
+* **PPδ**: Phenomic prediction using parental EFDs and a fixed dominance-to-additive effect ratio, accounting for dominance effects.
+
 
 **Full methodological details are described in the manuscript (Kondo et al., under review).**
 
