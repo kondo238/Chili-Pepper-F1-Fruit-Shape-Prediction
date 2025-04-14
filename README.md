@@ -82,5 +82,5 @@ The detailed explanation is written in the R script in this directory.
 * Representative_ratio_between_dominance_and_additive_effect.csv: Constant values to perform PPδ. These constant values are calculated in the former task `Part3.Raw_EFD-based_phenomic_prediction_of_F1_fruit`
 
 **Script:**
-* Demonstrates prediction and visualization of F1 contours based on .nef data.
+* Demonstrates prediction and visualization of F1 contours based on `.nef` data.
 * **No R packages required**.
