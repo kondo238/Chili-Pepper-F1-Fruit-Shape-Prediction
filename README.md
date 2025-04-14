@@ -23,7 +23,7 @@ Using the provided datasets and R scripts, the following four prediction strateg
 
 ・**PPδ**: Pure phenomic prediction based solely on parental EFDs, without considering dominance.
 
-Full methodological details are described in the manuscript (Kondo et al., under review).
+**Full methodological details are described in the manuscript (Kondo et al., under review).**
 
 # Repository Structure
 The repository is organized into four main directories, each corresponding to a specific step in the F1 fruit shape prediction pipeline. Each directory is self-contained and can be used independently.
@@ -33,70 +33,56 @@ The repository is organized into four main directories, each corresponding to a 
 
 # Datasets:
 ・Accession_list.csv: List of plant materials in our study
-
-・Raw_EFD_data.csv: Raw EFD data of the 291 accessions. In our study, EFDs were obtained from a total of 8,730 images (2 angles [Direction1 and Direction2] × 291 accessions × 3 cultivation years × 5 fruits)
+・Raw_EFD_data.csv: EFD data extracted from 8,730 fruit images (2 views × 291 accessions × 3 years × 5 fruits).
 
 # Script:
 ・Computes the average EFDs per accession per view direction.
 ・No R packages required.
 
 # Part2.Genomic_and_Phenomic_prediction_of_Fruit_shape_using_Averaged_EFDs
-・This directory is prepared for performing genomic and phenomic prediction methods (GP[20], GP[132], PPmid, PPδ).
+# Purpose: 
+Perform genomic (GP[20], GP[132]) and phenomic (PPmid, PPδ) prediction using the averaged EFDs calculated in Part 1.
+In each prediction method, fruit contours in the 159 F1 accessions are predicted based on the averaged EFDs data of 20 F1 parents and other inbred accessions.
 
-・In each prediction method, fruit contours in the 159 F1 accessions are predicted based on the averaged EFDs data of 20 F1 parents and other inbred accessions.
+# Datasets:
+・Accession_list.csv: List of plant materials in our study
+・Averaged_EFD_data.csv: Generated in Part 1.
+・Genotypic_data.csv: Genotype matrix (−1, 0, 1) from MIG-seq (3,149 SNPs).
+・Parental_combinations_of_F1.csv: Links each F1 to its parental accessions.
 
-・The dataset directory in this folder contains four datasets below:
-
-Accession_list.csv: List of plant materials in our study
-
-Averaged_EFD_data.csv: Averaged EFD data to perform all prediction methods. This data is obtained in the task "Part1.Averaged_EFD_Calculation" as described above
-
-Genotypic_data.csv: Numeric genotypic data (-1, 0, 1) of the 132 inbred accessions to perform GP[20] and GP[132]. This data is derived from MIG-seq, resulting in 3,149 SNPs.
-
-Parental_combinations_of_F1.csv: List of 159 F1 accessions with their parental accessions.
-
-・The R script in this directory enables prediction of EFDs in the 159 F1 accessions using GP[20], GP[132], PPmid, and PPδ, and the illustration of fruit contours based on the real and predicted EFDs.
-
-・This task needs three R packages: "stringr", "rrBLUP", and "RAINBOWR".
+# Script:
+・Predicts EFDs for the 159 F1 accessions.
+・Visualizes fruit contours using both observed and predicted EFDs.
+・**Required R packages**: stringr, rrBLUP, RAINBOWR.
 
 # Part3.Raw_EFD-based_phenomic_prediction_of_F1_fruit
-・This directory is prepared for performing raw EFD data-based phenomic prediction using PPδ (showing the highest prediction accuracy compared to the other three methods [GP[20], GP[132], PPmid]).
+# Purpose: 
+・Perform PPδ using raw EFD data, which showed the highest accuracy among all methods.
+In each prediction method, fruit contours in the 159 F1 accessions are predicted based on the averaged EFDs data of 20 F1 parents and other inbred accessions.
 
-・In each prediction method, fruit contours in the 159 F1 accessions are predicted based on the averaged EFDs data of 20 F1 parents and other inbred accessions.
+# Datasets:
+・Accession_list.csv: List of plant materials in our study
+・Parental_combinations_of_F1.csv: List of 159 F1 accessions with their parental accessions
+・Raw_EFD_data.csv: Same as in Part 1.
+・Representative_ratio_between_dominance_and_additive_effect.csv: Constant values to perform PPδ. These constant values are calculated in the former task "Part3.Raw_EFD-based_phenomic_prediction_of_F1_fruit"
 
-・The dataset directory in this folder contains four datasets below:
-
-Accession_list.csv: List of plant materials in our study
-
-Parental_combinations_of_F1.csv: List of 159 F1 accessions with their parental accessions
-
-Raw_EFD_data.csv: Raw EFD data of the 291 accessions. Same data used in the first task "Part1.Averaged_EFD_Calculation"
-
-Representative_ratio_between_dominance_and_additive_effect.csv: Constant values to perform PPδ. These constant values are calculated in the former task "Part3.Raw_EFD-based_phenomic_prediction_of_F1_fruit"
-
-・The R script in this directory enables raw EFD data-based PPδ to predict possible fruit contours in the 159 F1 accessions, and illustrates fruit contours based on the real and predicted EFDs.
-
-・This task needs two R packages: "stringr" and "progress".
+# Script:
+・Performs PPδ using raw EFD data.
+・Visualizes predicted fruit contours.
+・**Required R packages**: stringr, progress. 
 
 # Trial_for_F1_fruit_shape_prediction
-・This directory is prepared for a test trial of PPδ using initial EFD data (".nef" format file) obtained from SAPE program software (This software extracts EFD data from raw image data [.jpg])
+# Purpose:
+Trial run of the PPδ method using .nef files (raw EFD data exported from SHAPE software)
+[This software extracts EFD data from raw image data ".jpg"]
 
-・Using raw EFD data (".nef") of two inbred accessions (Parent1 and Parent2) as examples, we can perform PPδ using the averaged and raw EFD.
+The detailed explanation is written in the R script in this directory.
 
-・The detailed explanation is written in the R script in this directory.
+# Example Data:
+・Parent1_a.nef, Parent1_b.nef: Two views of Parent1.
+・Parent2_a.nef, Parent2_b.nef: Two views of Parent2.
+・Representative_ratio_between_dominance_and_additive_effect.csv: Constant values to perform PPδ. These constant values are calculated in the former task "Part3.Raw_EFD-based_phenomic_prediction_of_F1_fruit"
 
-・The dataset directory in this folder contains five datasets below:
-
-Parent1_a.nef: Raw EFD data in Direction 1 (one of the two fruit angles) for Parent1
-
-Parent1_b.nef: Raw EFD data in Direction 2 (the other angle) for Parent1
-
-Parent2_a.nef: Raw EFD data in Direction 1 (one of the two fruit angles) for Parent2
-
-Parent2_b.nef: Raw EFD data in Direction 2 (the other angle) for Parent2
-
-Representative_ratio_between_dominance_and_additive_effect.csv: Constant values to perform PPδ. These constant values are calculated in the former task "Part3.Raw_EFD-based_phenomic_prediction_of_F1_fruit"
-
-・The R script in this directory enables raw EFD data-based PPδ to predict possible fruit contours in the 159 F1 accessions, and illustrates fruit contours based on the real and predicted EFDs.
-
-・This task doesn't need any R packages.
+# Script:
+・Demonstrates prediction and visualization of F1 contours based on .nef data.
+・**No R packages required**.
