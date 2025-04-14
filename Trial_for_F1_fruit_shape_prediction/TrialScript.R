@@ -1,20 +1,22 @@
 ########## Trial script: Perform fruit shape prediction using PPδ ######################################################################
-###################### NOTE!!!################################################################################################################################
-# 1.This trial uses EFD data of the two accessions (Parent1 and Parent2) as parental examples and predicts their F1 fruit shape contours
-# 2.The EFD data was obtained by SHAPE program saved as ".nef" format (The number of harmonics was 20)
-# 3.In the shape program, EFDs for one direction (Direction 1 or Direction 2) were extracted from five fruits per one accession and saved as same ".nef" file
-# 4.For implementation of PPδ, representative ratio between dominance and additive_effect derived from the 156 F1 accession in author's research.
-# 5. fruit shape prediction was performed based on parental raw EFD and averaged EFD data
+###################### NOTES ################################################################################################################################
+# 1. This trial uses EFD data of the two accessions (Parent1 and Parent2) as parental examples and predicts their F1 fruit shape contours
+# 2. The EFD data was obtained by SHAPE program saved as ".nef" format (The number of harmonics was 20)
+# 3. In the shape program, EFDs for one direction (Direction 1 or Direction 2) were extracted from five fruits per one accession and saved as same ".nef" file
+# 4. For implementation of PPδ, representative ratio between dominance and additive_effect derived from the 156 F1 accession in author's research.
+# 5. Fruit shape prediction was performed based on parental raw EFD and averaged EFD data
 
-################################# Step.1 Data loading from ".nef" format file and Data formatting ###################################################################################################################
+################################# Step.1 Load and format EFD data ###################################################################################################################
+# Load raw EFD data from "nef" files and format them into a usable structure.
 # Parental raw EFD data was saved in "df"
 # Parental Averaged EFD data was saved in "Ave_df"
+
 setwd(getwd())
 ID <- c("Parent1", "Parent2") # Define parental ID
 Direction <- c("a", "b") # Define direction (a=Direction1, b=Direction2)
 Replicate <- c("P1", "P2", "P3", "P4", "P5") # Define fruit replicates (In this trial, we have five data for one direction per one accession)
 
-# Load EFD data
+# Load EFD data for each direction and parent
 Parent1_a <- as.data.frame(read.delim("./Dataset/Parent1_a.nef", sep = "")) # Load EFD data (Direction 1) from five fruits of Parent1 using SHAPE program
 Parent1_b <- as.data.frame(read.delim("./Dataset/Parent1_b.nef", sep = "")) # Load EFD data (Direction 2) from five_fruits of Parent1 using SHAPE program
 
@@ -86,7 +88,7 @@ for(j in 1:length(ID)){
   }
 }
 
-rm(mt_p1_a, mt_p1_b, mt_p2_a, mt_p2_b, Parent1_a, Parent1_b, Parent2_a, Parent2_b, i, no, p, df2, m, j, ave, ID, Replicate, Direction)
+rm(mt_p1_a, mt_p1_b, mt_p2_a, mt_p2_b, Parent1_a, Parent1_b, Parent2_a, Parent2_b, i, no, p, df2, m, j, ave, ID, Replicate, Direction) # Clean up workspace
 
 ################################# Step 2. Draw parental fruit contours based on the raw and averaged EFD #####################################################
 # Define the Elliptic Fourier function
@@ -155,7 +157,7 @@ for(i in 1:length(ID)){
   }
 }
 
-rm(x, ef, coord, lw, i, Direction, r, ef2coord, mt, ave_mt, ID, Replicate)
+rm(x, ef, coord, lw, i, Direction, r, ef2coord, mt, ave_mt, ID, Replicate) # Clean up workspace
 
 
 ################################ Step 3. Prediction of EFDs of F1 by PPδ using parental raw and averaged EFD data #############################################################################################
@@ -204,7 +206,7 @@ for(i in 1:80){
   Ave_Pre_df[,c(i+2)] <- as.numeric(Ave_Pre_df[,c(i+2)])
 }
 
-rm(x, a, pheno, p1, p2, p1h, p2h, midpoint, d_est, pre_pheno, Ave_Pre_df2, Ave_Pre_df3)
+rm(x, a, pheno, p1, p2, p1h, p2h, midpoint, d_est, pre_pheno, Ave_Pre_df2, Ave_Pre_df3) # Clean up workspace
 
 # Perform PPδ for raw EFD
 for(x in 1:length(Direction)){
@@ -243,7 +245,7 @@ for(i in 1:80){
   Pre_df[,c(i+2)] <- as.numeric(Pre_df[,c(i+2)])
 }
 
-rm(d_est, pheno_P1, pheno_P2, Pre_df2, Pre_df3, a, Direction, i, ID, j, midpoint, p1, p1h, p2, p2h, pre_pheno, Replicate, x)
+rm(d_est, pheno_P1, pheno_P2, Pre_df2, Pre_df3, a, Direction, i, ID, j, midpoint, p1, p1h, p2, p2h, pre_pheno, Replicate, x) # Clean up workspace 
 
 
 ################################# Step 3. Draw fruit contours based on predicted EFDs of F1 ######################################################
@@ -287,4 +289,4 @@ for(x in 1:length(Direction)){
          ann = F, axes = F, col = "black", lwd = lw)
   }
   }
-rm(coord, ef, mt, i, lw, x)
+rm(coord, ef, mt, i, lw, x) # Clean up workspace
