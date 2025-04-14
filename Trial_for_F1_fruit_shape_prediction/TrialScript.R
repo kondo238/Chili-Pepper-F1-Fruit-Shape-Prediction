@@ -6,7 +6,7 @@
 # 4. For implementation of PPδ, representative ratio between dominance and additive_effect derived from the 156 F1 accession in author's research.
 # 5. Fruit shape prediction was performed based on parental raw EFD and averaged EFD data
 
-################################# Step.1 Load and format EFD data ###################################################################################################################
+################################# Step. 1 Load and format EFD data ###################################################################################################################
 # Load raw EFD data from "nef" files and format them into a usable structure.
 # Parental raw EFD data was saved in "df"
 # Parental Averaged EFD data was saved in "Ave_df"
