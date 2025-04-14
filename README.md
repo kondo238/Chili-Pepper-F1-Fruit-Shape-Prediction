@@ -9,8 +9,11 @@
 This repository contains all datasets and R scripts used for implementing **phenomic and genomic prediction models** to estimate the fruit shapes of F1 chili pepper progenies (Capsicum annuum).
 
 ・Predictions are based on **Elliptic Fourier Descriptors (EFDs)** extracted from fruit images.
+
 ・F1 fruit shapes are predicted from parental EFDs, either:
+
     ・using **only image-derived EFDs** (*phenomic prediction*, PPδ), or
+    
     ・combining EFDs with **genotypic data** (*genomic prediction*, GP).
 
 Using the provided datasets and R scripts, the following four prediction strategies can be applied:
@@ -29,14 +32,20 @@ Using the provided datasets and R scripts, the following four prediction strateg
 The repository is organized into four main directories, each corresponding to a specific step in the F1 fruit shape prediction pipeline. Each directory is self-contained and can be used independently.
 
 # Part 1. Averaged EFD Calculation
-**Purpose:** Calculate the average EFDs for 291 accessions (132 inbreds + 159 F1s) from raw image data. These averaged EFDs are used in subsequent prediction steps.
+**Purpose:** 
+
+Calculate the average EFDs for 291 accessions (132 inbreds + 159 F1s) from raw image data. These averaged EFDs are used in subsequent prediction steps.
 
 **Datasets:**
+
 ・Accession_list.csv: List of plant materials in our study
+
 ・Raw_EFD_data.csv: EFD data extracted from 8,730 fruit images (2 views × 291 accessions × 3 years × 5 fruits).
 
 **Script:**
+
 ・Computes the average EFDs per accession per view direction.
+
 ・**No R packages required**.
 
 # Part 2. Genomic and Phenomic prediction of Fruit shape using Averaged EFDs
