@@ -59,19 +59,19 @@ In each prediction method, fruit contours in the 159 F1 accessions are predicted
 
 # Part 3. Raw EFD-based phenomic prediction of F1 fruit
 **Purpose:**
-・Perform PPδ using raw EFD data, which showed the highest accuracy among all methods.
+* Perform PPδ using raw EFD data, which showed the highest accuracy among all methods.
 In each prediction method, fruit contours in the 159 F1 accessions are predicted based on the averaged EFDs data of 20 F1 parents and other inbred accessions.
 
 **Datasets:**
-・Accession_list.csv: List of plant materials in our study
-・Parental_combinations_of_F1.csv: List of 159 F1 accessions with their parental accessions
-・Raw_EFD_data.csv: Same as in Part 1.
-・Representative_ratio_between_dominance_and_additive_effect.csv: Constant values to perform PPδ. These constant values are calculated in the former task "Part3.Raw_EFD-based_phenomic_prediction_of_F1_fruit"
+* Accession_list.csv: List of plant materials in our study
+* Parental_combinations_of_F1.csv: List of 159 F1 accessions with their parental accessions
+* Raw_EFD_data.csv: Same as in Part 1.
+* Representative_ratio_between_dominance_and_additive_effect.csv: Constant values to perform PPδ. These constant values are calculated in the former task "Part3.Raw_EFD-based_phenomic_prediction_of_F1_fruit"
 
 **Script:**
-・Performs PPδ using raw EFD data.
-・Visualizes predicted fruit contours.
-・**Required R packages**: stringr, progress. 
+* Performs PPδ using raw EFD data.
+* Visualizes predicted fruit contours.
+* **Required R packages**: stringr, progress. 
 
 # Trial for F1 fruit shape prediction
 **Purpose:**
@@ -81,10 +81,10 @@ Trial run of the PPδ method using .nef files (raw EFD data exported from SHAPE 
 The detailed explanation is written in the R script in this directory.
 
 **Example Data:**
-・Parent1_a.nef, Parent1_b.nef: Two views of Parent1.
-・Parent2_a.nef, Parent2_b.nef: Two views of Parent2.
-・Representative_ratio_between_dominance_and_additive_effect.csv: Constant values to perform PPδ. These constant values are calculated in the former task "Part3.Raw_EFD-based_phenomic_prediction_of_F1_fruit"
+* Parent1_a.nef, Parent1_b.nef: Two views of Parent1.
+* Parent2_a.nef, Parent2_b.nef: Two views of Parent2.
+* Representative_ratio_between_dominance_and_additive_effect.csv: Constant values to perform PPδ. These constant values are calculated in the former task "Part3.Raw_EFD-based_phenomic_prediction_of_F1_fruit"
 
 **Script:**
-・Demonstrates prediction and visualization of F1 contours based on .nef data.
-・**No R packages required**.
+* Demonstrates prediction and visualization of F1 contours based on .nef data.
+* **No R packages required**.
