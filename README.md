@@ -8,9 +8,9 @@
 # Overview
 This repository contains all datasets and R scripts used for implementing **phenomic and genomic prediction models** to estimate the fruit shapes of F1 chili pepper progenies (Capsicum annuum).
 
-・Predictions are based on **Elliptic Fourier Descriptors (EFDs)** extracted from fruit images.
+* Predictions are based on **Elliptic Fourier Descriptors (EFDs)** extracted from fruit images.
 
-・F1 fruit shapes are predicted from parental EFDs, either:
+* F1 fruit shapes are predicted from parental EFDs, either:
     ・using **only image-derived EFDs** (*phenomic prediction*, PPδ), or
     ・combining EFDs with **genotypic data** (*genomic prediction*, GP).
 
