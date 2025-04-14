@@ -57,7 +57,6 @@ In each prediction method, fruit contours in the 159 F1 accessions are predicted
 # Part 3. Raw EFD-based phenomic prediction of F1 fruit
 **Purpose:**
 * Perform PPδ using raw EFD data, which showed the highest accuracy among all methods.
-In each prediction method, fruit contours in the 159 F1 accessions are predicted based on the averaged EFDs data of 20 F1 parents and other inbred accessions.
 
 **Datasets:**
 * `Accession_list.csv`: List of plant materials in our study
