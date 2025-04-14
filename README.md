@@ -2,6 +2,7 @@
 Research paper：Prediction of fruit shapes in F1 progenies of chili peppers (Capsicum annuum) based on parental image data using elliptic Fourier analysis
 
 Authors：Fumiya Kondo, Yui Kumanomido, Mariasilvia D’Andrea, Valentino Palombo, Nahed Ahmed, Shino Futatsuyama, Kazuhiro Nemoto, Kenichi Matsushima
+
 Status: Under review (Computer and Electronics in Agriculture, Elsevier, submitted 2025-04-11)
 
 # Overview
