@@ -37,7 +37,7 @@ The repository is organized into four main directories, each corresponding to a 
 
 **Script:**
 ・Computes the average EFDs per accession per view direction.
-・No R packages required.
+・**No R packages required**.
 
 # Part 2. Genomic and Phenomic prediction of Fruit shape using Averaged EFDs
 **Purpose:** 
