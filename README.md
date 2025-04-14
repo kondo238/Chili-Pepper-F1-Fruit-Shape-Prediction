@@ -77,8 +77,8 @@ Trial run of the PPδ method using .nef files (raw EFD data exported from `SHAPE
 The detailed explanation is written in the R script in this directory.
 
 **Example Data:**
-* `Parent1_a.nef`, `Parent1_b.nef`: Two views of Parent1.
-* `Parent2_a.nef`, `Parent2_b.nef`: Two views of Parent2.
+* `Parent1_a.nef`, `Parent1_b.nef`: Two fruit angles of Parent1.
+* `Parent2_a.nef`, `Parent2_b.nef`: Two fruit angles of Parent2.
 * Representative_ratio_between_dominance_and_additive_effect.csv: Constant values to perform PPδ, calculated in the former task `Part3.Raw_EFD-based_phenomic_prediction_of_F1_fruit`
 
 **Script:**
