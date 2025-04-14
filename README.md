@@ -12,7 +12,6 @@ This repository contains all datasets and R scripts used for implementing **phen
 
 ・F1 fruit shapes are predicted from parental EFDs, either:
     ・using **only image-derived EFDs** (*phenomic prediction*, PPδ), or
-    
     ・combining EFDs with **genotypic data** (*genomic prediction*, GP).
 
 Using the provided datasets and R scripts, the following four prediction strategies can be applied:
