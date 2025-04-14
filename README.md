@@ -11,18 +11,18 @@ This repository contains all datasets and R scripts used for implementing **phen
 * Predictions are based on **Elliptic Fourier Descriptors (EFDs)** extracted from fruit images.
 
 * F1 fruit shapes are predicted from parental EFDs, either:
-    ・using **only image-derived EFDs** (*phenomic prediction*, PPδ), or
-    ・combining EFDs with **genotypic data** (*genomic prediction*, GP).
+    * using **only image-derived EFDs** (*phenomic prediction*, PPδ), or
+    * combining EFDs with **genotypic data** (*genomic prediction*, GP).
 
 Using the provided datasets and R scripts, the following four prediction strategies can be applied:
 
-・**GP[20]**: Genomic prediction using EFDs and genotypic data from 20 F1 parents. Dominance effects in F1 progenies are mostly not considered.
+* **GP[20]**: Genomic prediction using EFDs and genotypic data from 20 F1 parents. Dominance effects in F1 progenies are mostly not considered.
 
-・**GP[132]**: Genomic prediction using EFDs and genotypic data from 132 inbred accessions (including the 20 F1 parents). Dominance effects are mostly not considered.
+* **GP[132]**: Genomic prediction using EFDs and genotypic data from 132 inbred accessions (including the 20 F1 parents). Dominance effects are mostly not considered.
 
-・**PPmid**: Phenomic prediction using parental EFDs and a fixed dominance-to-additive effect ratio, accounting for dominance effects.
+* **PPmid**: Phenomic prediction using parental EFDs and a fixed dominance-to-additive effect ratio, accounting for dominance effects.
 
-・**PPδ**: Pure phenomic prediction based solely on parental EFDs, without considering dominance.
+* **PPδ**: Pure phenomic prediction based solely on parental EFDs, without considering dominance.
 
 **Full methodological details are described in the manuscript (Kondo et al., under review).**
 
