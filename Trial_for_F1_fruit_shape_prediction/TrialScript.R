@@ -8,7 +8,7 @@
 
 ################################# Step.1 Data loading from ".nef" format file and Data formatting ###################################################################################################################
 # Parental raw EFD data was saved in "df"
-# Parental Averaged EFD data was saved in "Ave df"
+# Parental Averaged EFD data was saved in "Ave_df"
 setwd(getwd())
 ID <- c("Parent1", "Parent2") # Define parental ID
 Direction <- c("a", "b") # Define direction (a=Direction1, b=Direction2)
