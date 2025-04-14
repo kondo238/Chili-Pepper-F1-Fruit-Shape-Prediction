@@ -10,7 +10,7 @@ This repository contains all datasets and R scripts used for implementing **phen
 
 * Predictions are based on **Elliptic Fourier Descriptors (EFDs)** extracted from fruit images.
 * F1 fruit shapes are predicted from parental EFDs, either:
-    * using **only image-derived EFDs** (*phenomic prediction*, PPδ), or
+    * using **only image-derived EFDs** (*phenomic prediction*, PP), or
     * combining EFDs with **genotypic data** (*genomic prediction*, GP).
 
 Using the provided datasets and R scripts, the following four prediction strategies can be applied:
