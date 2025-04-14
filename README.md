@@ -71,7 +71,7 @@ In each prediction method, fruit contours in the 159 F1 accessions are predicted
 
 # Trial for F1 fruit shape prediction
 **Purpose:**
-Trial run of the PPδ method using .nef files (raw EFD data exported from SHAPE software)
+Trial run of the PPδ method using .nef files (raw EFD data exported from `SHAPE` software)
 [This software extracts EFD data from raw image data from `.jpg` files]
 
 The detailed explanation is written in the R script in this directory.
